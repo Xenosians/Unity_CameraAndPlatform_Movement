@@ -10,7 +10,7 @@ public class Platform : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(pos2, pos1, Mathf.PingPong(Time.time * speed, speed));
+        transform.localPosition = Vector3.Lerp(pos2, pos1, Mathf.PingPong(Time.time * speed, 1));
     }
 
 }
