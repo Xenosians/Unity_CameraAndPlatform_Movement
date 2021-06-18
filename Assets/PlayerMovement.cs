@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public bool isJumping;
 
+
     void Update()
     {
        
@@ -23,6 +24,32 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = false;
         }
-       
+    }
+
+    void OnCollisionEnter2D(Collision2D Other)
+    {
+        if(Other.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+        }
+
+        if(Other.gameObject.CompareTag("Platform"))
+        {
+            this.transform.parent = Other.transform;
+            isJumping = false;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D Other)
+    {
+        if(Other.gameObject.CompareTag("Ground"))
+        {
+            isJumping = true;
+        }
+
+        if (Other.gameObject.CompareTag("Platform"))
+        {
+            this.transform.parent = null;
+        }
     }
 }

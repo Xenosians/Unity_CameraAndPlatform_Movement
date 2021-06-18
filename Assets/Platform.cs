@@ -4,31 +4,13 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    public Transform Pos1, Pos2;
-    public float speed;
-    public Transform startPos;
-    Vector3 nextPos;
-    void Start()
+    public Vector3 pos1;
+    public Vector3 pos2;
+    public float speed = 1.0f;
+
+    private void Update()
     {
-        nextPos = startPos.position;
+        transform.position = Vector3.Lerp(pos2, pos1, Mathf.PingPong(Time.time * speed, speed));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(transform.position == Pos1.position)
-        {
-            nextPos = Pos2.position;
-        }
-        if (transform.position == Pos2.position)
-        {
-            nextPos = Pos1.position;
-        }
-        
-        transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(Pos1.position, Pos2.position);
-    }
 }
